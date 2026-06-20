@@ -5,7 +5,12 @@ import {
   type TweetProps,
   type TwitterComponents,
 } from "react-tweet";
-import { getTweet, type Tweet } from "react-tweet/api";
+import {
+  getTweet,
+  type Indices,
+  type Tweet,
+  type TweetEntities,
+} from "react-tweet/api";
 
 import { cn } from "@/lib/utils";
 
@@ -98,6 +103,45 @@ export const TweetNotFound = ({
     <h3>Tweet not found</h3>
   </div>
 );
+
+const normalizeIndices = (tweet: {
+  display_text_range?: Indices;
+  text?: string;
+}): Indices => {
+  if (
+    Array.isArray(tweet.display_text_range) &&
+    tweet.display_text_range.length === 2
+  ) {
+    return [...tweet.display_text_range] as Indices;
+  }
+
+  return [0, Array.from(tweet.text || "").length];
+};
+
+const normalizeEntities = (
+  entities: Partial<TweetEntities> | undefined,
+): TweetEntities => ({
+  hashtags: Array.isArray(entities?.hashtags) ? entities.hashtags : [],
+  urls: Array.isArray(entities?.urls) ? entities.urls : [],
+  user_mentions: Array.isArray(entities?.user_mentions)
+    ? entities.user_mentions
+    : [],
+  symbols: Array.isArray(entities?.symbols) ? entities.symbols : [],
+  ...(Array.isArray(entities?.media) ? { media: entities.media } : {}),
+});
+
+const normalizeTweet = (tweet: Tweet): Tweet => ({
+  ...tweet,
+  display_text_range: normalizeIndices(tweet),
+  entities: normalizeEntities(tweet.entities),
+  quoted_tweet: tweet.quoted_tweet
+    ? {
+        ...tweet.quoted_tweet,
+        display_text_range: normalizeIndices(tweet.quoted_tweet),
+        entities: normalizeEntities(tweet.quoted_tweet.entities),
+      }
+    : undefined,
+});
 
 export const TweetHeader = ({ tweet }: { tweet: EnrichedTweet }) => (
   <div className="flex flex-row justify-between tracking-tight">
@@ -229,7 +273,7 @@ export const MagicTweet = ({
   components?: TwitterComponents;
   className?: string;
 }) => {
-  const enrichedTweet = enrichTweet(tweet);
+  const enrichedTweet = enrichTweet(normalizeTweet(tweet));
   return (
     <div
       className={cn(

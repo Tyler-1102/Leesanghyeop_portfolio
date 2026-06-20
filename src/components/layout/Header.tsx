@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -8,14 +8,14 @@ import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 
 import { Container } from '@/components/layout/Container'
-import avatarImage from '@/images/avatar.jpg'
-import { navItems } from '@/config/siteConfig'
+import profileImage from '@/images/sanghyeop.jpg'
+import { enNavItems, navItems } from '@/config/siteConfig'
 import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { GithubRepo } from '@/components/shared/GithubRepo'
+import { LanguageSwitch } from '@/components/shared/LanguageSwitch'
 import { name } from '@/config/infoConfig'
+import { enName } from '@/config/enPortfolio'
 import { ChevronDownIcon, XIcon } from 'lucide-react'
-
-import TypingAnimation from "@/components/ui/typing-animation";
 
 function MobileNavItem({
   href,
@@ -34,10 +34,15 @@ function MobileNavItem({
 }
 
 function MobileNavigation(
-  props: React.ComponentPropsWithoutRef<typeof Popover>,
+  props: React.ComponentPropsWithoutRef<typeof Popover> & {
+    items: typeof navItems
+    displayName: string
+  },
 ) {
+  const { items, displayName, ...popoverProps } = props
+
   return (
-    <Popover {...props}>
+    <Popover {...popoverProps}>
       <Popover.Button className="group flex items-center rounded-full px-4 py-2 text-sm font-medium shadow-lg ring-1 ring-muted backdrop-blur ">
         Menu
         <ChevronDownIcon className="ml-3 h-auto w-2" />
@@ -65,20 +70,22 @@ function MobileNavigation(
         >
           <Popover.Panel
             focus
-            className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl p-8 ring-1 ring-muted bg-card"
+            className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-card p-8 ring-1 ring-muted"
           >
             <div className="flex flex-row-reverse items-center justify-between">
               <Popover.Button aria-label="Close menu" className="-m-1 p-1">
                 <XIcon className="h-6 w-6 text-muted-foreground" />
               </Popover.Button>
               <h2 className="text-sm font-medium text-muted-foreground">
-                {name}
+                {displayName}
               </h2>
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base dark:divide-zinc-100/5">
-                {navItems.map((item) => (
-                  <MobileNavItem key={item.name} href={item.href}>{item.name}</MobileNavItem>
+                {items.map((item) => (
+                  <MobileNavItem key={item.name} href={item.href}>
+                    {item.name}
+                  </MobileNavItem>
                 ))}
               </ul>
             </nav>
@@ -106,7 +113,7 @@ function NavItem({
           'relative block px-3 py-2 transition',
           isActive
             ? 'text-primary'
-            : 'opacity-80 hover:opacity-100 hover:text-primary',
+            : 'opacity-80 hover:text-primary hover:opacity-100',
         )}
       >
         {children}
@@ -118,11 +125,17 @@ function NavItem({
   )
 }
 
-function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
+function DesktopNavigation(
+  props: React.ComponentPropsWithoutRef<'nav'> & {
+    items: typeof navItems
+  },
+) {
+  const { items, ...navProps } = props
+
   return (
-    <nav {...props}>
-      <ul className="flex rounded-full px-3 text-sm font-medium bg-card ring-1 ring-muted shadow-md backdrop-blur">
-        {navItems.map((item, index) => (
+    <nav {...navProps}>
+      <ul className="flex rounded-full bg-card px-3 text-sm font-medium shadow-md ring-1 ring-muted backdrop-blur">
+        {items.map((item, index) => (
           <Fragment key={item.name}>
             {index > 0 && (
               <li className="flex items-center">
@@ -137,8 +150,6 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   )
 }
 
-
-
 function clamp(number: number, a: number, b: number) {
   let min = Math.min(a, b)
   let max = Math.max(a, b)
@@ -147,13 +158,17 @@ function clamp(number: number, a: number, b: number) {
 
 function AvatarContainer({
   showName = false,
+  displayName = name,
+  homeHref = '/',
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'> & {
   showName?: boolean
+  displayName?: string
+  homeHref?: string
 }) {
   return (
-    <div className='flex flex-row items-center gap-2'>
+    <div className="flex flex-row items-center gap-2">
       <div
         className={clsx(
           className,
@@ -162,12 +177,8 @@ function AvatarContainer({
         {...props}
       />
       {showName && (
-        <Link
-          href="/"
-          aria-label="Home"
-          className='pointer-events-auto'
-        >
-          <div className="text-md font-semibold capitalize">{name}</div>
+        <Link href={homeHref} aria-label="Home" className="pointer-events-auto">
+          <div className="text-md font-semibold capitalize">{displayName}</div>
         </Link>
       )}
     </div>
@@ -176,34 +187,41 @@ function AvatarContainer({
 
 function Avatar({
   large = false,
+  href = '/',
   className,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'> & {
   large?: boolean
+  href?: string
 }) {
   return (
     <Link
-      href="/"
+      href={href}
       aria-label="Home"
       className={clsx(className, 'pointer-events-auto')}
       {...props}
     >
       <Image
-        src={avatarImage}
+        src={profileImage}
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
-          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
+          'rounded-full bg-zinc-100 object-cover object-[68%_63%] dark:bg-zinc-800',
           large ? 'h-16 w-16' : 'h-9 w-9',
         )}
-        priority
+        priority={large}
       />
     </Link>
   )
 }
 
 export function Header() {
-  let isHomePage = usePathname() === '/'
+  const pathname = usePathname()
+  const isEnglishPage = pathname === '/en' || pathname.startsWith('/en/')
+  const navigationItems = isEnglishPage ? enNavItems : navItems
+  const displayName = isEnglishPage ? enName : name
+  const homeHref = isEnglishPage ? '/en' : '/'
+  let isHomePage = pathname === '/' || pathname === '/en'
 
   let headerRef = useRef<React.ElementRef<'div'>>(null)
   let avatarRef = useRef<React.ElementRef<'div'>>(null)
@@ -298,8 +316,6 @@ export function Header() {
       setProperty('--avatar-hi-opacity', opacity.toString())
     }
 
-
-
     function updateStyles() {
       updateHeaderStyles()
       updateAvatarStyles()
@@ -357,23 +373,23 @@ export function Header() {
                   <div className="flex flex-row items-center gap-4">
                     <Avatar
                       large
+                      href={homeHref}
                       className="block h-16 w-16 origin-left"
                       style={{ transform: 'var(--avatar-image-transform)' }}
                     />
                     <div
-                      className="text-3xl md:text-6xl font-bold tracking-tight flex flex-row"
+                      className="flex flex-col justify-center"
                       style={{
                         opacity: 'var(--avatar-hi-opacity, 0)',
-                        transform: 'var(--avatar-hi-transform)'
+                        transform: 'var(--avatar-hi-transform)',
                       }}
                     >
-                      Hi,{' '}
-                      <TypingAnimation
-                        className="text-3xl md:text-6xl font-bold tracking-tight"
-                        text={`I'm ${name} `}
-                        duration={150}
-                      />
-                      👋
+                      <div className="text-3xl font-bold md:text-5xl">
+                        {displayName}
+                      </div>
+                      <div className="mt-1 text-sm font-medium text-muted-foreground md:text-base">
+                        HR x IT Portfolio
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -399,19 +415,31 @@ export function Header() {
             <div className="relative flex gap-4">
               <div className="flex flex-1">
                 {!isHomePage && (
-                  <AvatarContainer showName={true}>
-                    <Avatar />
+                  <AvatarContainer
+                    showName={true}
+                    displayName={displayName}
+                    homeHref={homeHref}
+                  >
+                    <Avatar href={homeHref} />
                   </AvatarContainer>
                 )}
               </div>
               <div className="flex flex-1 justify-end md:justify-center">
-                <MobileNavigation className="pointer-events-auto md:hidden" />
-                <DesktopNavigation className="pointer-events-auto hidden md:block" />
+                <MobileNavigation
+                  items={navigationItems}
+                  displayName={displayName}
+                  className="pointer-events-auto md:hidden"
+                />
+                <DesktopNavigation
+                  items={navigationItems}
+                  className="pointer-events-auto hidden md:block"
+                />
               </div>
               <div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto flex flex-row items-center gap-2 md:mr-2">
                   <ThemeToggle />
                   <GithubRepo />
+                  <LanguageSwitch />
                 </div>
               </div>
             </div>
