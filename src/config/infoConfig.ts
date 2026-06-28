@@ -7,9 +7,9 @@ export * from './activity'
 
 // personal info
 export const name = '이상협'
-export const headline = '인사를 더 잘하려고 IT와 AI를 배웠습니다.'
+export const headline = '포트폴리오'
 export const introduction =
-  '심리학을 공부하고 노무사 시험을 준비하면서 사람과 제도 사이의 일을 가까이 봤습니다. SSAFY에서는 개발과 AI를 배웠습니다. 그 경험을 HR 업무를 더 정확하게 운영하는 데 쓰고 싶습니다. 제 관심은 기술 자체보다 현장에서 반복되는 문제를 줄이는 쪽에 있습니다.'
+  '심리학을 공부하고 인사노무를 익히면서 HR의 기본을 배웠습니다. SSAFY에서 개발과 AI를 배우고 나서는, 인사 업무도 기술을 잘 이해하는 사람이 더 정확하고 효율적으로 바꿀 수 있다고 느꼈습니다. 저는 IT와 AI를 현장에 맞게 활용할 줄 아는 인사담당자로 성장하고 싶습니다.'
 export const email = '7176ryu@naver.com'
 export const githubUsername = 'Tyler-1102'
 

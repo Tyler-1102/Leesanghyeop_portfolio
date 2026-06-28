@@ -31,7 +31,7 @@ const proofPoints = [
     label: 'Tech Leverage',
     title: '업무를 화면과 로직으로 옮기는 힘',
     description:
-      'SSAFY에서 Python, Django, Vue, React, 생성형 AI를 배우며 복잡한 절차를 서비스 흐름으로 옮기는 연습을 했습니다.',
+      'SSAFY에서 Python, Django, Vue, React, AI를 배우며 복잡한 절차를 서비스 흐름으로 옮기는 연습을 했습니다.',
   },
   {
     label: 'Field Sense',
@@ -88,8 +88,8 @@ export default async function Home() {
             aria-label={headline}
             className="mt-4 max-w-2xl text-3xl font-bold leading-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl"
           >
-            <span className="block">인사를 더 잘하려고</span>
-            <span className="block">IT와 AI를 배웠습니다.</span>
+            <span className="block">안녕하세요.</span>
+            <span className="block">HR 매니저 이상협입니다.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[15px] leading-7 text-muted-foreground sm:text-base">
             {introduction}
