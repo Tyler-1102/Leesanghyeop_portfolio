@@ -18,7 +18,7 @@ export const educationList: Array<EducationItemType> = [
   },
   {
     school: '아주대학교',
-    major: '심리학과 졸업 | 산업·조직심리학 기반 형성',
+    major: '심리학과 졸업',
     logo: 'college',
     start: '2018.03',
     end: '2021.02',

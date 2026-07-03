@@ -18,7 +18,6 @@ import {
   enProjectIntro,
   enProjects,
   enProofPoints,
-  enStorySteps,
 } from '@/config/enPortfolio'
 
 export const metadata: Metadata = {
@@ -86,9 +85,6 @@ export default function EnglishHome() {
     <Container className="mt-10">
       <section className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_0.78fr] md:items-center">
         <div className="md:pt-10">
-          <p className="text-sm font-semibold uppercase text-primary">
-            HR x IT Portfolio
-          </p>
           <h1
             aria-label={enHeadline}
             className="mt-4 max-w-2xl text-3xl font-bold leading-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl"
@@ -129,60 +125,7 @@ export default function EnglishHome() {
         ))}
       </section>
 
-      <section className="my-12 grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <div>
-          <p className="text-sm font-semibold uppercase text-primary">
-            Career Narrative
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-zinc-900 dark:text-zinc-100">
-            Technology is how I make HR work clearer.
-          </h2>
-          <p className="mt-5 text-base text-muted-foreground">
-            My projects involve software, but my direction is HR. I use
-            technology to understand people, policies, and operations more
-            precisely.
-          </p>
-        </div>
-        <ol className="space-y-4">
-          {enStorySteps.map((step) => (
-            <li
-              key={step.period}
-              className="grid grid-cols-[3rem_1fr] gap-4 rounded-lg border border-muted p-5"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
-                {step.period}
-              </div>
-              <div>
-                <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {step.description}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className="mx-auto my-4 flex max-w-xl flex-col gap-6 border-t border-muted py-10 lg:max-w-none">
-        <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 md:text-5xl">
-          {enProjectHeadLine}
-        </h2>
-        <p className="mb-6 max-w-2xl text-base text-muted-foreground">
-          {enProjectIntro}
-        </p>
-        <ul
-          role="list"
-          className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2"
-        >
-          {enProjects.slice(0, 4).map((project) => (
-            <ProjectCard key={project.name} project={project} titleAs="h3" />
-          ))}
-        </ul>
-      </section>
-
-      <section className="my-8 grid max-w-xl grid-cols-1 gap-10 border-t border-muted py-10 lg:max-w-none lg:grid-cols-2">
+      <section className="my-8 grid max-w-xl grid-cols-1 gap-10 py-6 lg:max-w-none lg:grid-cols-2">
         <div className="space-y-10">
           <CredentialList title="Experience" items={enExperienceList} />
           <CredentialList title="Learning" items={enLearningList} />
@@ -213,6 +156,27 @@ export default function EnglishHome() {
           </Link>
         </div>
       </section>
+
+      <section className="mx-auto my-4 flex max-w-xl flex-col gap-6 border-t border-muted py-10 lg:max-w-none">
+        <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 md:text-5xl">
+          {enProjectHeadLine}
+        </h2>
+        <p className="mb-6 max-w-2xl text-base text-muted-foreground">
+          {enProjectIntro}
+        </p>
+        <ul role="list" className="grid grid-cols-1">
+          <ProjectCard project={enProjects[0]} titleAs="h3" />
+        </ul>
+        <ul
+          role="list"
+          className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {enProjects.slice(1, 4).map((project) => (
+            <ProjectCard key={project.name} project={project} titleAs="h3" />
+          ))}
+        </ul>
+      </section>
+
     </Container>
   )
 }

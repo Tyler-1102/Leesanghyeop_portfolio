@@ -9,7 +9,7 @@ import profileImage from '@/images/sanghyeop.jpg'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'HR을 더 잘하고 싶어 IT와 AI를 익힌 이상협의 포트폴리오 소개입니다.',
+    '사람과 기준을 함께 챙기는 인사담당자 이상협의 포트폴리오 소개입니다.',
 }
 
 const strengths = [
@@ -27,6 +27,32 @@ const strengths = [
     title: '사용자 중심 커뮤니케이션',
     description:
       '영어강사와 아동 멘토링을 하며 상대의 수준과 상황에 맞춰 설명하고 피드백을 받아 계속 고치는 연습을 해왔습니다.',
+  },
+]
+
+const certifications = [
+  { name: 'TOEIC', detail: '940 / 990', date: '2024.12' },
+  { name: 'OPIc (영어)', detail: 'Intermediate Mid 3', date: '2026.03' },
+  {
+    name: '데이터분석 준전문가(ADsP)',
+    detail: '한국데이터산업진흥원',
+    date: '2023.03',
+  },
+  { name: '한국사능력검정', detail: '2급', date: '2021.02' },
+]
+
+const volunteerHighlights = [
+  {
+    value: '380시간+',
+    label: '아동·청소년 교육 멘토링 중심의 누적 봉사시간',
+  },
+  {
+    value: '3년 2개월',
+    label: '가장 오래 이어간 1:1 멘토링 — 고1부터 재수를 거쳐 대학 입학까지',
+  },
+  {
+    value: '개나리상',
+    label: '송파구자원봉사센터 수상, 이화여대 종합사회복지관 봉사상',
   },
 ]
 
@@ -81,12 +107,38 @@ export default function About() {
             </ol>
           </div>
 
+          <div className="rounded-lg border border-muted p-6">
+            <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+              Certifications & Languages
+            </h2>
+            <ul className="mt-5 space-y-3">
+              {certifications.map((cert) => (
+                <li
+                  key={cert.name}
+                  className="flex items-baseline justify-between gap-3"
+                >
+                  <div>
+                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                      {cert.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {cert.detail}
+                    </p>
+                  </div>
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    {cert.date}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div>
             <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
               Contact
             </h2>
             <p className="mt-3 text-sm text-muted-foreground">
-              HR 현장의 불편을 기술로 조금 더 정확하게 풀어내는 일에 관심이
+              구성원이 덜 불안하게 일할 수 있는 조직을 만드는 일에 관심이
               있습니다.
             </p>
             <SocialLinks />
@@ -109,6 +161,33 @@ export default function About() {
               </h3>
               <p className="mt-3 text-sm text-muted-foreground">
                 {strength.description}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-16 border-t border-muted pt-10">
+        <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+          Mentoring & Volunteering
+        </h2>
+        <p className="mt-4 max-w-3xl text-base text-muted-foreground">
+          대학 시절부터 지금까지 아동·청소년 교육 멘토링을 중심으로 봉사를
+          이어왔습니다. 사람의 변화는 지속적인 관심과 실행에서 만들어진다는 걸
+          배웠고, 이 태도가 제가 HR에서 온보딩과 교육, 구성원의 성장을 대하는
+          방식의 바탕이 되었습니다.
+        </p>
+        <ul className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+          {volunteerHighlights.map((highlight) => (
+            <li
+              key={highlight.value}
+              className="rounded-lg border border-muted p-5"
+            >
+              <p className="text-2xl font-bold text-primary">
+                {highlight.value}
+              </p>
+              <p className="mt-3 text-sm text-muted-foreground">
+                {highlight.label}
               </p>
             </li>
           ))}

@@ -388,7 +388,7 @@ export function Header() {
                         {displayName}
                       </div>
                       <div className="mt-1 text-sm font-medium text-muted-foreground md:text-base">
-                        HR x IT Portfolio
+                        HR Professional Portfolio
                       </div>
                     </div>
                   </div>

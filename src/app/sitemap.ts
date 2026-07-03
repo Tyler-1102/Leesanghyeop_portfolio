@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { site_url } from '@/config/siteConfig'
 import { getAllBlogs } from '@/lib/blogs'
+import { getAllProjectSlugs } from '@/lib/projectDetails'
 
 /**
  * Google's limit is 50,000 URLs per sitemap
@@ -58,6 +59,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sitemapList.push({
       url: `${baseUrl}/blogs/${blog.slug}`,
       lastModified: new Date(blog.date).toISOString(),
+    })
+  }
+
+  const projectSlugs = await getAllProjectSlugs()
+  for (const slug of projectSlugs) {
+    sitemapList.push({
+      url: `${baseUrl}/projects/${slug}`,
+      lastModified: new Date().toISOString(),
     })
   }
 

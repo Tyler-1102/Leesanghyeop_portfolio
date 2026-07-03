@@ -10,18 +10,18 @@ export type CareerItemType = {
 
 export const careerList: Array<CareerItemType> = [
   {
-    company: '세미산업(주)',
-    title: '생산 공정팀 사원 | 현장 일정, 출고, 재고, 부서 협업 경험',
-    logo: 'factory',
-    start: '2021.03',
-    end: '2023.04',
-  },
-  {
     company: '공터영어 수지성복점',
-    title: '영어강사 및 학생관리 | 학습 데이터, 출결, 신규 등록 관리',
+    title: '파트타임 영어강사 및 학생관리 | 학습 데이터, 출결, 신규 등록 관리',
     logo: 'teacher',
     start: '2023.12',
     end: '2024.09',
+  },
+  {
+    company: '세미산업(주)',
+    title: '생산 공정팀 사원 | 생산 및 물류 업무, 출고·재고 관리,노사협의 참여',
+    logo: 'factory',
+    start: '2021.03',
+    end: '2023.04',
   },
   {
     company: '한국과학기술정보연구원(KISTI)',

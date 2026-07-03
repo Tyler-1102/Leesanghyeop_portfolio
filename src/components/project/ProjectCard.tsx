@@ -15,6 +15,7 @@ export function ProjectCard({
   titleAs?: keyof React.JSX.IntrinsicElements
 }) {
   const utmLink = `https://${project.link.href}${utm_source ? `?utm_source=${utm_source}` : ''}`
+  const detailHref = project.slug ? `/projects/${project.slug}` : null
   let Component = titleAs ?? 'h2'
   return (
     <li className="group relative flex h-full flex-col items-start">
@@ -45,11 +46,6 @@ export function ProjectCard({
         </div>
 
         <div className="relative z-10 ml-1 mt-auto pt-4">
-          {project.techStack && project.techStack.length > 0 && (
-            <p className="mb-3 text-xs font-medium text-zinc-600 dark:text-zinc-300">
-              {project.techStack.join(' · ')}
-            </p>
-          )}
           {project.tags && project.tags.length > 0 && (
             <div className="flex flex-wrap items-center gap-x-2">
               {project.tags.map((tag, index) => (
@@ -57,17 +53,25 @@ export function ProjectCard({
                   key={index}
                   className="group flex items-center justify-center space-x-0.5"
                 >
-                  <HashIcon className="icon-scale h-3 w-3 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">{tag}</span>
+                  <HashIcon className="icon-scale h-3 w-3 text-primary/70" />
+                  <span className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
+                    {tag}
+                  </span>
                 </div>
               ))}
             </div>
           )}
+          {project.techStack && project.techStack.length > 0 && (
+            <p className="mt-3 text-[11px] text-muted-foreground/70">
+              {project.techStack.join(' · ')}
+            </p>
+          )}
         </div>
         <Link
-          href={utmLink}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={detailHref ?? utmLink}
+          {...(detailHref
+            ? {}
+            : { target: '_blank', rel: 'noopener noreferrer' })}
           className="absolute inset-0 z-20"
         >
           <ArrowUpRight
