@@ -17,6 +17,7 @@ import {
   ChalkboardTeacher,
   Code,
   Scales,
+  Phone,
 } from '@phosphor-icons/react'
 
 export function CustomIcon({
@@ -59,6 +60,8 @@ export function CustomIcon({
       return <Code size={size} weight="duotone" />
     case 'scales':
       return <Scales size={size} weight="duotone" />
+    case 'phone':
+      return <Phone size={size} weight="duotone" />
     default:
       return null
   }

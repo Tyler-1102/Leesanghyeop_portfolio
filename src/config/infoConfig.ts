@@ -7,7 +7,8 @@ export const name = '이상협'
 export const headline = '포트폴리오'
 export const introduction =
   '심리학을 공부하고 인사노무를 익히며 HR의 기본을 다졌습니다. 제조현장에서 생산직으로 근무하며 노사협의에 참여한 경험을 통해 인사 업무의 중요성을 체감했고, SSAFY에서 개발과 AI를 배우며 HR Tech 프로젝트를 수행하면서 더 효율적인 HR을 만들고 싶다는 목표가 생겼습니다. 현장 경험과 AI 활용 역량을 바탕으로 구성원을 든든하게 지원하는 HR 전문가로 성장하고자 합니다.'
-export const email = '7176ryu@naver.com'
+export const email = 'hyeop7285@gmail.com'
+export const phone = '010-9927-7285'
 export const githubUsername = 'Tyler-1102'
 
 // about page

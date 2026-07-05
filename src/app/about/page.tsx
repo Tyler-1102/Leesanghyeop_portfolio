@@ -137,10 +137,6 @@ export default function About() {
             <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
               Contact
             </h2>
-            <p className="mt-3 text-sm text-muted-foreground">
-              구성원이 덜 불안하게 일할 수 있는 조직을 만드는 일에 관심이
-              있습니다.
-            </p>
             <SocialLinks />
           </div>
         </aside>
