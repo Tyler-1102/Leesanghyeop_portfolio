@@ -5,6 +5,7 @@ import { ArrowUpRight } from '@phosphor-icons/react'
 import { ProjectItemType } from '@/config/infoConfig'
 import { utm_source } from '@/config/siteConfig'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Favicon } from 'favicon-stealer'
 
 export function ProjectCard({
@@ -14,8 +15,12 @@ export function ProjectCard({
   project: ProjectItemType
   titleAs?: keyof React.JSX.IntrinsicElements
 }) {
+  const pathname = usePathname()
+  const isEnglish = pathname === '/en' || pathname.startsWith('/en/')
   const utmLink = `https://${project.link.href}${utm_source ? `?utm_source=${utm_source}` : ''}`
-  const detailHref = project.slug ? `/projects/${project.slug}` : null
+  const detailHref = project.slug
+    ? `${isEnglish ? '/en' : ''}/projects/${project.slug}`
+    : null
   let Component = titleAs ?? 'h2'
   return (
     <li className="group relative flex h-full flex-col items-start">

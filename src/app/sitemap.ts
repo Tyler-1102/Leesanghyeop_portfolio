@@ -70,6 +70,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   }
 
+  const enProjectSlugs = await getAllProjectSlugs('en')
+  for (const slug of enProjectSlugs) {
+    sitemapList.push({
+      url: `${baseUrl}/en/projects/${slug}`,
+      lastModified: new Date().toISOString(),
+    })
+  }
+
   console.log('sitemap end, size:', sitemapList.length)
   return sitemapList
 }

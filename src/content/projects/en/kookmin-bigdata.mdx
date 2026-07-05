@@ -1,0 +1,41 @@
+---
+title: 'Kookmin University Big Data Analysis Competition'
+subtitle: 'Finding co-movement between trade items and forecasting future transaction amounts'
+date: '2025.11 - 2025.12'
+team: '4-person team'
+role: 'AI model development'
+github: 'github.com/Tyler-1102/kookmin_bigdata'
+techStack:
+  - 'Python'
+  - 'Pandas'
+  - 'LightGBM'
+highlights:
+  - value: 'Top 16.5%'
+    label: 'DACON leaderboard'
+  - value: '3,539 pairs'
+    label: 'Significant co-movement candidates identified'
+  - value: '8 months'
+    label: 'Maximum lag in the correlation analysis'
+---
+
+## The problem it started from
+
+When trade in one item rises, some items follow months later. The competition asked us to find co-movement between items in trade data and forecast future transaction amounts — and I was responsible for building the AI model.
+
+## What I did
+
+### Time-series preprocessing
+
+I aggregated monthly transaction amounts per item and converted them into year-month time series, along with criteria for filtering out items whose trading history was too thin to trust.
+
+### Lagged correlation analysis
+
+To find leading–lagging relationships between items, I ran correlation analysis with lags of up to 8 months and set a correlation-coefficient threshold, identifying 3,539 significant co-movement candidate pairs.
+
+### Forecasting model
+
+I forecasted future transaction amounts per item with a LightGBM regression model and combined the predictions with the co-movement candidates for the final submission, reaching the top 16.5% of the DACON leaderboard.
+
+## Where this meets HR practice
+
+I carried out the full data-analysis cycle myself — preprocessing, setting analysis criteria, modeling, and packaging results. It became my **foundation for handling HR data**, from attendance-pattern analysis to workforce-demand forecasting.

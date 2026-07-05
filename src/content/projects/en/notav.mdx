@@ -1,0 +1,75 @@
+---
+title: 'NOTAV | HR Tech Labor Management Service'
+subtitle: 'Enter your work conditions and see, at a glance, the allowances and rights you are entitled to'
+date: '2025.11 - 2025.12'
+role: 'Full-stack development · Labor-law standard research and review · Presentation (50% contribution)'
+github: 'github.com/Hyeongnnin/moonsong'
+techStack:
+  - 'Django'
+  - 'Vue 3'
+  - 'TypeScript'
+  - 'LangChain'
+  - 'OpenAI API'
+highlights:
+  - value: '6 diagnostics'
+    label: 'Minimum wage · Weekly holiday pay · Night/overtime pay · Annual leave · Severance · 5-employee threshold'
+  - value: 'Verified per statute'
+    label: 'Tested edge cases like past-midnight shifts and multiple workplaces'
+  - value: 'Personalized AI counsel'
+    label: 'Labor consultation that answers from the user’s actual work records'
+---
+
+## The problem it started from
+
+Part-time workers struggle to confirm their own rights. These are the questions I heard most often around me:
+
+- "Is my paycheck calculated correctly?"
+- "Who gets severance pay and who doesn't?"
+- "I want labor advice that actually fits my situation."
+
+Legal texts are hard to read, search results rarely match your case, and a labor attorney feels out of reach. NOTAV lets you enter your work conditions and records, then **diagnoses at a glance whether you meet minimum wage and qualify for weekly holiday pay, annual leave, and severance — with estimated amounts** — and connects those records to AI labor consultation and work-document management.
+
+## What I did
+
+### Translating labor-law standards into calculation logic
+
+From the requirements for weekly holiday pay (15+ hours per week plus perfect attendance on scheduled workdays), the formula for weekly holiday hours (scheduled hours ÷ scheduled workdays), 2025 minimum-wage verification, and night/overtime premiums, to average-wage calculation for severance — I researched and reviewed the standards directly from statutes and labor references, then implemented them as calculation logic.
+
+### Verifying edge cases
+
+I wrote per-statute test code (annual leave · weekly holiday pay · night work · severance) for the situations where payroll goes wrong most easily — shifts that cross midnight, working at multiple workplaces, cancelled shifts. The bar was simple: "a calculator is not allowed to be roughly right."
+
+### Designing personalized AI labor consultation
+
+To keep the AI from answering in generalities, I designed it as an agent with tools that query the user's employment contract and recent payroll calculations directly. Ask "How much was my paycheck last month?" and it answers from the actual records.
+
+### A structure that survives legal amendments
+
+Instead of hard-coding allowance standards, I separated them into a dedicated policy file. When the law changes, only the policy file needs updating — practice in keeping standards management separate from the system.
+
+## Screens
+
+![Main dashboard](/images/projects/notav/dashboard.png)
+*Work calendar and monthly statistics — hours worked, weekly holiday pay, night premiums, and estimated pay are calculated automatically, with a diagnosis summary showing eligibility for each allowance at a glance*
+
+![Work information settings](/images/projects/notav/work-info.png)
+*Entering the work conditions that drive the diagnosis: workplace size (5+ employees or not), hourly wage, deduction method, and start date*
+
+![Weekly schedule input](/images/projects/notav/schedule-form.png)
+*Per-day work and break time form — enter even past-midnight shifts and the contractual weekly scheduled hours are calculated automatically*
+
+![Work record editing](/images/projects/notav/work-record.png)
+*Daily work-record management — shifts between 10 p.m. and 6 a.m. automatically receive the 50% night premium, and attendance status feeds into the weekly-holiday-pay eligibility check*
+
+![Working-condition diagnosis](/images/projects/notav/diagnosis.png)
+*Diagnosing weekly holiday pay and premium eligibility requirement by requirement (worker status · 15 hours per week · perfect attendance), explaining with data even why an allowance is not payable*
+
+![AI labor consultation](/images/projects/notav/consultation.png)
+*AI labor consultation that answers based on the user's actual work records*
+
+![Work document management](/images/projects/notav/documents.png)
+*Writing work-related documents such as résumés with a live preview, then downloading them as PDFs*
+
+## Where this meets HR practice
+
+Finding pay and allowance standards in the law, reviewing them, and verifying exceptions one by one built the **fundamentals of payroll operations and labor-risk review**. This project taught me that HR earns trust by setting standards precisely — and by communicating them in language employees can understand.

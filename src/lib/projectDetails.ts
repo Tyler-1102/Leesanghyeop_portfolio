@@ -23,13 +23,24 @@ export type ProjectDetailMeta = {
 
 const CONTENT_DIR = 'src/content/projects'
 
-export async function getAllProjectSlugs(): Promise<string[]> {
-  const files = await glob('*.mdx', { cwd: `./${CONTENT_DIR}` })
+export type ProjectLocale = 'ko' | 'en'
+
+function contentDir(locale: ProjectLocale) {
+  return locale === 'en' ? `${CONTENT_DIR}/en` : CONTENT_DIR
+}
+
+export async function getAllProjectSlugs(
+  locale: ProjectLocale = 'ko',
+): Promise<string[]> {
+  const files = await glob('*.mdx', { cwd: `./${contentDir(locale)}` })
   return files.map((file) => file.replace(/\.mdx$/, ''))
 }
 
-export async function getProjectDetail(slug: string) {
-  const filePath = path.join(process.cwd(), CONTENT_DIR, `${slug}.mdx`)
+export async function getProjectDetail(
+  slug: string,
+  locale: ProjectLocale = 'ko',
+) {
+  const filePath = path.join(process.cwd(), contentDir(locale), `${slug}.mdx`)
   try {
     const source = await fs.readFile(filePath, 'utf-8')
     const { content, frontmatter } = await compileMDX({

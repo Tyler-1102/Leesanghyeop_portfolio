@@ -42,6 +42,7 @@ export const enProjects: Array<ProjectItemType> = [
     description:
       '"Is my paycheck calculated correctly?", "Who is entitled to severance pay?", "I want labor advice that fits my situation." — this project started from three questions part-time workers actually ask. Enter your work conditions and records, and the service diagnoses at a glance whether you meet minimum wage and qualify for weekly holiday pay, annual leave, and severance, with estimated amounts. I translated labor-law standards into calculation logic, verified edge cases like past-midnight shifts, and designed the AI consultation to answer from the user\'s actual work records. Full-stack development, legal-standard review, and final presentation.',
     link: { href: 'github.com/Hyeongnnin/moonsong', label: 'NOTAV Repository' },
+    slug: 'notav',
     date: '2025.11 - 2025.12',
     category: ['HR Tech'],
     techStack: ['Django', 'Vue 3', 'TypeScript', 'LangChain', 'OpenAI API'],
@@ -55,6 +56,7 @@ export const enProjects: Array<ProjectItemType> = [
       href: 'github.com/Tyler-1102/AIRadar',
       label: 'AI RADAR Repository',
     },
+    slug: 'ai-radar',
     date: '2026.02 - 2026.03',
     category: ['Data / AI'],
     techStack: ['Python', 'Claude', 'Prompt Engineering'],
@@ -65,6 +67,7 @@ export const enProjects: Array<ProjectItemType> = [
     description:
       'A service that turns children\'s game-like cognitive training into growth data counselors can use. It records response speed and focus alongside correctness, separates per-session and cumulative views, and keeps the AI report as a decision-support tool for counselors. As the front-end developer, I applied feedback from 8 child users and 19 counselor comments — the project won an Excellence Award at SSAFY.',
     link: { href: 'github.com/Tyler-1102/E_roun', label: 'E-roun Repository' },
+    slug: 'e-roun',
     date: '2026.04 - 2026.05',
     category: ['People Data'],
     techStack: ['React Native', 'Expo', 'React', 'TypeScript', 'Recharts'],
@@ -78,6 +81,7 @@ export const enProjects: Array<ProjectItemType> = [
       href: 'github.com/Tyler-1102/kookmin_bigdata',
       label: 'Kookmin Bigdata Repository',
     },
+    slug: 'kookmin-bigdata',
     date: '2025.11 - 2025.12',
     category: ['Data Analysis'],
     techStack: ['Python', 'Pandas', 'LightGBM'],
