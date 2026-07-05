@@ -1,7 +1,7 @@
 // projects
-export const projectHeadLine = 'HR을 더 잘하기 위해 만든 프로젝트들'
+export const projectHeadLine = 'HR X IT 프로젝트'
 export const projectIntro =
-  '저에게 기술은 HR의 도구입니다. 급여 산정의 정확성, 직무의 변화, 구성원의 성장 — 인사담당자가 매일 마주하는 질문을 직접 풀어보며, AI와 데이터를 HR 현장에 쓰는 법을 익혔습니다.'
+  'SSAFY에서 기술 습득을 통해 급여 산정의 정확성, 직무의 변화, 구성원의 성장 — 인사담당자가 매일 마주하는 질문을 직접 풀어보며, AI와 데이터를 HR 현장에 쓰는 법을 익혔습니다.'
 
 export type ProjectItemType = {
   name: string

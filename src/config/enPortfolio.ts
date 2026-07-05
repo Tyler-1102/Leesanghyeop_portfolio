@@ -32,9 +32,9 @@ export const enCapabilityNotes = [
   'A working style that turns exceptions from the field into the next improvement point',
 ]
 
-export const enProjectHeadLine = 'Projects Built to Do HR Better'
+export const enProjectHeadLine = 'HR X IT Projects'
 export const enProjectIntro =
-  'To me, technology is a tool for HR. Payroll accuracy, changing jobs, employee growth — I tackled the questions HR practitioners face every day, and learned how to bring AI and data into real HR work.'
+  'Through the technical skills I built at SSAFY, I tackled the questions HR practitioners face every day — payroll accuracy, changing jobs, employee growth — and learned how to bring AI and data into real HR work.'
 
 export const enProjects: Array<ProjectItemType> = [
   {
