@@ -6,7 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { Container } from '@/components/layout/Container'
 import { CustomIcon } from '@/components/shared/CustomIcon'
 import { getAllProjectSlugs, getProjectDetail } from '@/lib/projectDetails'
-import { projects } from '@/config/projects'
+import { hrProjects, projects } from '@/config/projects'
 import { utm_source } from '@/config/siteConfig'
 
 interface Props {
@@ -39,9 +39,13 @@ export default async function ProjectDetailPage({ params }: Props) {
   }
 
   const { meta, content } = detail
-  const githubUrl = `https://${meta.github}${utm_source ? `?utm_source=${utm_source}` : ''}`
+  const githubUrl = meta.github
+    ? `https://${meta.github}${utm_source ? `?utm_source=${utm_source}` : ''}`
+    : null
 
-  const detailProjects = projects.filter((project) => project.slug)
+  const detailProjects = [...hrProjects, ...projects].filter(
+    (project) => project.slug,
+  )
   const currentIndex = detailProjects.findIndex(
     (project) => project.slug === slug,
   )
@@ -78,17 +82,19 @@ export default async function ProjectDetailPage({ params }: Props) {
             <span className="text-muted-foreground/40">|</span>
             <span>{meta.role}</span>
           </div>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Link
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-muted px-4 py-2 text-sm font-medium transition hover:border-primary hover:text-primary"
-            >
-              <CustomIcon name="github" size={18} />
-              GitHub 저장소
-            </Link>
-          </div>
+          {githubUrl && (
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Link
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-full border border-muted px-4 py-2 text-sm font-medium transition hover:border-primary hover:text-primary"
+              >
+                <CustomIcon name="github" size={18} />
+                GitHub 저장소
+              </Link>
+            </div>
+          )}
         </header>
 
         {meta.highlights && meta.highlights.length > 0 && (

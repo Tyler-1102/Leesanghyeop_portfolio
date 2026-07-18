@@ -25,7 +25,7 @@ export const careerList: Array<CareerItemType> = [
   },
   {
     company: '한국과학기술정보연구원(KISTI)',
-    title: '콘텐츠큐레이션센터 임시직 | R&D 데이터 정제 및 품질 검수',
+    title: '데이터구축참여자 | R&D 데이터 정제 및 품질 검수',
     logo: 'database',
     start: '2020.09',
     end: '2020.12',

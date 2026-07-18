@@ -7,7 +7,8 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint src/"
+    "lint": "eslint src/",
+    "pdf:ax": "node scripts/export-print-ax-pdf.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {

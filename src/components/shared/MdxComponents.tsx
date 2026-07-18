@@ -4,6 +4,67 @@ import Link from 'next/link'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
+type EvidenceFigureProps = {
+  src: string
+  alt: string
+  label: string
+  title: string
+  caption: string
+}
+
+const evidenceImageDimensions: Record<
+  string,
+  { width: number; height: number }
+> = {
+  '/images/projects/team-onboarding/collaboration-workflow-guide.png': {
+    width: 1736,
+    height: 1392,
+  },
+  '/images/projects/team-onboarding/story-point-guide.png': {
+    width: 1374,
+    height: 616,
+  },
+}
+
+const EvidenceFigure = ({
+  src,
+  alt,
+  label,
+  title,
+  caption,
+}: EvidenceFigureProps) => {
+  const dimensions = evidenceImageDimensions[src] ?? {
+    width: 1600,
+    height: 900,
+  }
+
+  return (
+    <figure className="not-prose my-8 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-700 dark:bg-zinc-900">
+      <div className="border-b border-zinc-200 px-5 py-4 dark:border-zinc-700 sm:px-6">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+          {label}
+        </p>
+        <h3 className="mt-2 text-base font-semibold text-zinc-900 dark:text-zinc-100 sm:text-lg">
+          {title}
+        </h3>
+      </div>
+      <div className="bg-[#18191f] p-2 sm:p-4">
+        <Image
+          src={src}
+          alt={alt}
+          width={dimensions.width}
+          height={dimensions.height}
+          sizes="(min-width: 768px) 768px, 100vw"
+          className="h-auto w-full rounded-lg"
+        />
+      </div>
+      <figcaption className="px-5 py-4 text-sm leading-6 text-zinc-600 dark:text-zinc-400 sm:px-6">
+        {caption}
+      </figcaption>
+    </figure>
+  )
+}
+
 const CustomLink = (props: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>) => {
   const href = props.href
   if (href?.startsWith('/')) {
@@ -98,7 +159,8 @@ const CustomPre = (props: any) => {
 };
 
 export const mdxComponents: MDXComponents = {
-  Image: (props: ImageProps) => <Image {...props} className='rounded-3xl my-8 shadow-xl hover:shadow-2xl transition-shadow duration-300' />,
+  EvidenceFigure,
+  Image: ({ alt, ...props }: ImageProps) => <Image alt={alt} {...props} className='rounded-3xl my-8 shadow-xl hover:shadow-2xl transition-shadow duration-300' />,
   a: CustomLink,
   h1: (props: any) => (
     <h1 

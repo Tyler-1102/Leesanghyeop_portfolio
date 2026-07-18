@@ -16,7 +16,7 @@ export type ProjectDetailMeta = {
   date: string
   role: string
   team?: string
-  github: string
+  github?: string
   techStack?: string[]
   highlights?: ProjectHighlight[]
 }

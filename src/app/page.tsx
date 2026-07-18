@@ -1,24 +1,9 @@
-import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronRightIcon } from 'lucide-react'
 
 import { Container } from '@/components/layout/Container'
-import Career from '@/components/home/Career'
-import Education from '@/components/home/Education'
 import SocialLinks from '@/components/home/SocialLinks'
-import { BlogCard } from '@/components/home/BlogCard'
-import { ProjectCard } from '@/components/project/ProjectCard'
-import { getAllBlogs, type BlogType } from '@/lib/blogs'
 import profileImage from '@/images/sanghyeop.jpg'
-import {
-  blogHeadLine,
-  blogIntro,
-  headline,
-  introduction,
-  projectHeadLine,
-  projectIntro,
-  projects,
-} from '@/config/infoConfig'
+import { headline, introduction } from '@/config/infoConfig'
 
 const proofPoints = [
   {
@@ -41,15 +26,7 @@ const proofPoints = [
   },
 ]
 
-const capabilityNotes = [
-  '입퇴사, 근태, 휴가, 급여 같은 기본 HR 운영을 꼼꼼하게 배우고 처리하는 태도',
-  '반복되는 문의와 처리 절차를 매뉴얼, 템플릿, 프롬프트로 정리하는 습관',
-  '현장의 예외를 그냥 넘기지 않고 다음 개선 포인트로 남기는 방식',
-]
-
-export default async function Home() {
-  const blogList = (await getAllBlogs()).slice(0, 2)
-
+export default function Home() {
   return (
     <Container className="mt-10">
       <section className="grid grid-cols-1 gap-10 md:grid-cols-[1fr_0.78fr] md:items-center">
@@ -94,73 +71,6 @@ export default async function Home() {
         ))}
       </section>
 
-      <section className="my-8 grid max-w-xl grid-cols-1 gap-10 py-6 lg:max-w-none lg:grid-cols-2">
-        <div className="space-y-10">
-          <Career />
-          <Education />
-        </div>
-        <div>
-          <p className="text-sm font-semibold uppercase text-primary">
-            How I Work
-          </p>
-          <h2 className="mt-3 text-3xl font-bold text-zinc-900 dark:text-zinc-100">
-            기준은 정확하게, 설명은 현장 언어로 하려고 합니다.
-          </h2>
-          <ul className="mt-6 space-y-4">
-            {capabilityNotes.map((note) => (
-              <li
-                key={note}
-                className="rounded-lg border border-muted p-5 text-sm text-muted-foreground"
-              >
-                {note}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="mx-auto my-4 flex max-w-xl flex-col gap-6 border-t border-muted py-10 lg:max-w-none">
-        <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 md:text-5xl">
-          {projectHeadLine}
-        </h2>
-        <p className="mb-6 max-w-2xl text-base text-muted-foreground">
-          {projectIntro}
-        </p>
-        <ul role="list" className="grid grid-cols-1">
-          <ProjectCard project={projects[0]} titleAs="h3" />
-        </ul>
-        <ul
-          role="list"
-          className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {projects.slice(1).map((project) => (
-            <ProjectCard key={project.name} project={project} titleAs="h3" />
-          ))}
-        </ul>
-      </section>
-
-      {blogList.length > 0 && (
-        <section className="my-8 border-t border-muted py-10">
-          <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 md:text-5xl">
-            {blogHeadLine}
-          </h2>
-          <p className="mt-4 max-w-2xl text-base text-muted-foreground">
-            {blogIntro}
-          </p>
-          <div className="mt-10 grid max-w-xl grid-cols-1 gap-10 lg:max-w-none lg:grid-cols-2">
-            {blogList.map((blog: BlogType) => (
-              <BlogCard key={blog.slug} blog={blog} titleAs="h3" />
-            ))}
-          </div>
-          <Link
-            href="/blogs"
-            className="mt-8 flex flex-row items-center text-sm font-semibold text-primary hover:underline"
-          >
-            Read more notes
-            <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
-          </Link>
-        </section>
-      )}
     </Container>
   )
 }

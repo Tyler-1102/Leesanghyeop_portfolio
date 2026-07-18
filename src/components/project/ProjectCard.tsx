@@ -1,6 +1,6 @@
 'use client'
 
-import { HashIcon } from 'lucide-react'
+import { BookOpenCheckIcon, HashIcon } from 'lucide-react'
 import { ArrowUpRight } from '@phosphor-icons/react'
 import { ProjectItemType } from '@/config/infoConfig'
 import { utm_source } from '@/config/siteConfig'
@@ -17,10 +17,13 @@ export function ProjectCard({
 }) {
   const pathname = usePathname()
   const isEnglish = pathname === '/en' || pathname.startsWith('/en/')
-  const utmLink = `https://${project.link.href}${utm_source ? `?utm_source=${utm_source}` : ''}`
+  const utmLink = project.link
+    ? `https://${project.link.href}${utm_source ? `?utm_source=${utm_source}` : ''}`
+    : null
   const detailHref = project.slug
     ? `${isEnglish ? '/en' : ''}/projects/${project.slug}`
     : null
+  const cardHref = detailHref ?? utmLink ?? `${isEnglish ? '/en' : ''}/projects`
   let Component = titleAs ?? 'h2'
   return (
     <li className="group relative flex h-full flex-col items-start">
@@ -28,11 +31,17 @@ export function ProjectCard({
         <div className="">
           <div className="flex flex-col items-start justify-center gap-4 sm:flex-row sm:items-center sm:justify-start">
             <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full">
-              <Favicon
-                url={project.link.href}
-                src={project.logo}
-                alt={`${project.name} logo`}
-              />
+              {project.link ? (
+                <Favicon
+                  url={project.link.href}
+                  src={project.logo}
+                  alt={`${project.name} logo`}
+                />
+              ) : (
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <BookOpenCheckIcon className="h-5 w-5" aria-hidden="true" />
+                </div>
+              )}
             </div>
             <div>
               <Component className="text-base font-semibold">
@@ -73,7 +82,7 @@ export function ProjectCard({
           )}
         </div>
         <Link
-          href={detailHref ?? utmLink}
+          href={cardHref}
           {...(detailHref
             ? {}
             : { target: '_blank', rel: 'noopener noreferrer' })}

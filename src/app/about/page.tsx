@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { aboutMeHeadline, aboutParagraphs } from '@/config/infoConfig'
 import { Container } from '@/components/layout/Container'
 import SocialLinks from '@/components/about/SocialLinks'
+import Career from '@/components/home/Career'
+import Education from '@/components/home/Education'
 import profileImage from '@/images/sanghyeop.jpg'
 
 export const metadata: Metadata = {
@@ -12,33 +14,33 @@ export const metadata: Metadata = {
     '사람과 기준을 함께 챙기는 인사담당자 이상협의 포트폴리오 소개입니다.',
 }
 
-const strengths = [
-  {
-    title: 'HR·노무 도메인 이해',
-    description:
-      '근로기준법, 임금, 근로계약, 휴가, 급여·수당 산정 기준을 공부했습니다. NOTAV 프로젝트에서는 그 기준을 실제 서비스 로직으로 옮겼습니다.',
-  },
-  {
-    title: '데이터를 꼼꼼히 보는 습관',
-    description:
-      'KISTI 데이터 정제, SSAFY 프로젝트, ADsP 학습을 거치며 작은 입력 오류와 예외 처리가 업무 신뢰도에 얼마나 큰 영향을 주는지 배웠습니다.',
-  },
-  {
-    title: '사용자 중심 커뮤니케이션',
-    description:
-      '영어강사와 아동 멘토링을 하며 상대의 수준과 상황에 맞춰 설명하고 피드백을 받아 계속 고치는 연습을 해왔습니다.',
-  },
-]
-
 const certifications = [
   { name: 'TOEIC', detail: '940 / 990', date: '2024.12' },
   { name: 'OPIc (영어)', detail: 'Intermediate Mid 3', date: '2026.03' },
+  {
+    name: 'HRM전문가',
+    detail: '한국공인노무사회',
+    date: '2026.07',
+  },
   {
     name: '데이터분석 준전문가(ADsP)',
     detail: '한국데이터산업진흥원',
     date: '2023.03',
   },
   { name: '한국사능력검정', detail: '2급', date: '2021.02' },
+]
+
+const awards = [
+  {
+    name: 'SSAFY 자율 프로젝트 우수상',
+    detail: '삼성전자주식회사 · 2학기 자율 프로젝트 2등',
+    date: '2026.05',
+  },
+  {
+    name: '봉사활동 200시간 개나리상',
+    detail: '송파구자원봉사센터',
+    date: '2019.12',
+  },
 ]
 
 const volunteerHighlights = [
@@ -133,6 +135,32 @@ export default function About() {
             </ul>
           </div>
 
+          <div className="rounded-lg border border-muted p-6">
+            <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+              Awards
+            </h2>
+            <ul className="mt-5 space-y-3">
+              {awards.map((award) => (
+                <li
+                  key={award.name}
+                  className="flex items-baseline justify-between gap-3"
+                >
+                  <div>
+                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                      {award.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {award.detail}
+                    </p>
+                  </div>
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    {award.date}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div>
             <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
               Contact
@@ -144,23 +172,12 @@ export default function About() {
 
       <section className="mt-16 border-t border-muted pt-10">
         <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
-          Core Strengths
+          Experience & Learning
         </h2>
-        <ul className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-          {strengths.map((strength) => (
-            <li
-              key={strength.title}
-              className="rounded-lg border border-muted p-5"
-            >
-              <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
-                {strength.title}
-              </h3>
-              <p className="mt-3 text-sm text-muted-foreground">
-                {strength.description}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <Career />
+          <Education />
+        </div>
       </section>
 
       <section className="mt-16 border-t border-muted pt-10">
